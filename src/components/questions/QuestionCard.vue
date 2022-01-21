@@ -1,24 +1,28 @@
-<template>
+<template >
   <div class="question-card h-100 p-3">
-      <b-row class="justify-content-center align-items-center h-100">
-          <div class="text-center px-3">
-              <p class="question fs-5">
-                  {{question.text}}
-              </p>
-            <b-row class="px-3 mt-4">
-                <b-col col="6">
-                    <span class="">
-                        {{formatTime(question.time)}}
-                    </span>
-                </b-col>
-                <b-col col="6" class="text-center">
-                    <span class="">
-                        {{question.score}} points
-                    </span>
-                </b-col>
-            </b-row>
-          </div>
-      </b-row>
+    <b-row class="justify-content-center align-items-center h-100">
+      <div class="text-center px-3">
+        <p class="question fs-5">
+          {{ question.text }}
+        </p>
+        <b-row class="px-3 mt-4">
+          <b-col col="6">
+            <span class="">
+              Time Remaining:
+              {{ formatTime(question.time) }}
+            </span>
+          </b-col>
+          <b-col col="6" class="text-center">
+            <span class=""> {{ question.score }} points </span>
+          </b-col>
+        </b-row>
+        <b-row class="px-3 mt-4">
+          <b-col col="6" v-for="option in question.options" :key="Object.keys(option)[0]" class="mt-4">
+            <button>{{Object.keys(option)[0]}}.{{Object.values(option)[0]}}</button>
+          </b-col>
+        </b-row>
+      </div>
+    </b-row>
   </div>
 </template>
 
@@ -43,13 +47,13 @@ export default {
     };
   },
   methods: {
-      formatTime(seconds){
-          const minutes = parseInt(seconds / 60);
-          seconds = seconds % 60;
-          const minutesFormatted = minutes ? `${minutes} min ` : '';
-          const secondssFormatted = seconds ? `${seconds} sec` : '';
-          return `${minutesFormatted}${secondssFormatted}`;
-      }
+    formatTime(seconds) {
+      const minutes = parseInt(seconds / 60);
+      seconds = seconds % 60;
+      const minutesFormatted = minutes ? `${minutes} minutes ` : "";
+      const secondssFormatted = seconds ? `${seconds} seconds` : "";
+      return `${minutesFormatted}${secondssFormatted}`;
+    },
   },
 };
 </script>
